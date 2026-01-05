@@ -1,0 +1,28 @@
+.skeleton {
+    width: 100%;
+    height: 100%;
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+.skull {
+    font-size: 4rem;
+    display: inline-block;
+    animation: skeleton_anim 0.5s infinite linear;
+}
+
+@keyframes skeleton_anim {
+    0% {
+        transform: rotate(0deg)
+    }
+
+    100% {
+        transform: rotate(360deg)
+    }
+}

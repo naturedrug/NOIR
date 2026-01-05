@@ -1,0 +1,58 @@
+.message {
+    border: 1px solid rgb(99, 99, 99);
+    padding: 10px;
+    border-radius: 40px;
+    color: white;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    word-wrap: normal;
+    word-break: break-all;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    width: auto;
+    min-width: 150px;
+}
+
+.my {
+    background-color: rgb(15, 15, 15);
+}
+
+.message .avatar {
+    width: 48px;
+    height: 48px;
+    border-radius: 40px;
+    margin: 5px;
+}
+
+.message .username {
+    color: black;
+    transition: all 0.1s;
+    text-decoration: none;
+    font-weight: 500;
+    background-color: white;
+}
+
+.message .messageMedia {
+    border-radius: 10px;
+    max-width: 500px;
+    max-height: 500px;
+    transform: scale(0.9);
+    order: 999;
+}
+
+.message .username:hover {
+    color: rgb(82, 137, 255);
+}
+
+.messageContainer {
+    display: flex;
+    flex-direction: column;
+    padding: 5px;
+    width: 100%;
+}
+
+.messageContainer p {
+    margin-top: 25px;
+}

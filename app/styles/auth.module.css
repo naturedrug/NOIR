@@ -1,0 +1,56 @@
+.authForm {
+    position: absolute;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgb(50,50,50);
+    padding: 100px;
+    transition: all 0.2s;
+}
+
+.authForm:hover {
+    border: 1px solid rgb(90, 90, 90);
+}
+
+.loginForm, .regForm {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.formInput {
+    outline: none;
+    border: none;
+    padding: 10px;
+    background-color: rgb(10,10,10);
+}
+
+.submit {
+    cursor: pointer;
+    padding: 20px;
+    border: 1px solid rgb(50,50,50);
+    transition: all 0.2s;
+    background-color: rgb(10,10,10);
+}
+
+.submit:hover {
+    color: black;
+    background-color: white;
+}
+
+
+.authForm a {
+    position: absolute;
+    right: 10px;
+    bottom: 10px;
+    text-align: right;
+    font-size: 0.8rem;
+    opacity: 0.8;
+    transition: all 0.2s;
+}
+
+.authForm a:hover {
+    opacity: 1;
+}

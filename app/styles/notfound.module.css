@@ -1,0 +1,28 @@
+
+
+.unknownPage {
+    text-transform: uppercase;
+}
+
+.error {
+    position: fixed;
+    left: 50%;
+    top: 50%;
+    transform: translate(-50%, -50%);
+    text-align: center;
+}
+
+.error img {
+    width: 128px;
+    height: 128px;
+}
+
+.errorIcon {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.errorInfo {
+    color: rgb(180, 180, 180);
+}
