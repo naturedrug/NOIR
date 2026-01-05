@@ -8,6 +8,7 @@ import { cookies } from "next/headers";
 import LoginForm from "@/app/components/LoginForm";
 import ProfileMine from "@/app/components/ProfileMine";
 import ProfileIsntMine from "@/app/components/ProfileIsntMine";
+import { UserContext } from "@/app/contexts/UserContext";
 
 
 const __filename = fileURLToPath(import.meta.url);
@@ -49,5 +50,9 @@ export default async function Users({params}) {
         id: user.id,
     } // without password and token for safe
     
-    return (isTokenValid) ? <ProfileMine user={openUserInfo}></ProfileMine> : <ProfileIsntMine user={openUserInfo}></ProfileIsntMine>
+    return (isTokenValid)
+    ?
+    <ProfileMine user={openUserInfo}></ProfileMine>
+    :
+    <ProfileIsntMine user={openUserInfo}></ProfileIsntMine>
 }

@@ -721,7 +721,7 @@ router.post("/pm-info", async (req, res) => {
 
 router.post("/new-pm", async (req, res) => {
 
-  if (!req.cookies.token || !req.body.friendID) { console.log("don't have token or friendID (new-pm)"); return }
+  if (!req.body.token || !req.body.friendID) { console.log("don't have token or friendID (new-pm)"); return }
 
   const db = await fs.promises.readFile(dbPath, 'utf-8')
   const dbParsed = JSON.parse(db)
@@ -737,7 +737,7 @@ router.post("/new-pm", async (req, res) => {
   let findedUser;
 
   for (const user of dbParsed.users) {
-    const valid = await bcrypt.compare(req.cookies.token, user.token)
+    const valid = await bcrypt.compare(req.body.token, user.token)
 
     if (valid) {
       findedUser = user

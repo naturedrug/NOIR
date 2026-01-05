@@ -159,7 +159,7 @@ nextApp.prepare().then(() => {
             // token: ${message.token}
             //         `);
 
-            console.log("processing: ", message);
+            console.log("processing msg from: ", roomId);
 
             const db = await fs.promises.readFile(dbPath, "utf-8");
 
@@ -234,7 +234,7 @@ nextApp.prepare().then(() => {
             const channelFromDB = dbParsed.channels.find((c) => roomId.slice(5) === c.channelID)
 
             if (!channelFromDB) {
-                const PMFromDB = dbParsed.pms.find((pm) => pm.id === roomId)
+                const PMFromDB = dbParsed.pms.find((pm) => pm.id === roomId.slice(5))
 
                 if (!PMFromDB) return;
 
