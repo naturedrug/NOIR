@@ -1,3 +1,7 @@
+html, body {
+  overflow: hidden;
+}
+
 .page {
   min-height: 100vh;
 }
@@ -13,8 +17,7 @@
   margin-left: 100px;
   display: flex;
   flex-direction: column;
-  min-height: 100vh;
-  width: calc(100% - 100px);
+  max-height: 100vh;
 }
 
 .content {

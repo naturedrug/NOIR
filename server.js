@@ -224,11 +224,24 @@ nextApp.prepare().then(() => {
             }
 
 
+            const now = new Date();
+            const hours = String(now.getHours()).padStart(2, '0');
+            const minutes = String(now.getMinutes()).padStart(2, '0');
+
+            const time = {
+                day: now.getDate(),
+                month: now.getMonth(),
+                hours: hours,
+                minutes: minutes
+            }
+
+
             const newMessage = {
                 media: (message.media) ? `/static/${mediaID}.jpg` : undefined,
                 text: message.text,
                 userID: userID,
-                at: Date()
+                id: nanoid(20),
+                at: time
             };
 
             const channelFromDB = dbParsed.channels.find((c) => roomId.slice(5) === c.channelID)

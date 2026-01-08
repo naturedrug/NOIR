@@ -2,11 +2,9 @@ import css from "../styles/sidebar.module.css"
 import { useEffect, useState, useCallback } from "react"
 import getCookie from "./cookies"
 import Channel from "./Channel"
-import { useUser } from "../contexts/UserContext"
 
 export default function Sidebar({ onMessagesChanged, setAllMessages, allMessages, setCachedUsers }) {
   const [loadedChats, setLoadedChats] = useState([])
-  const user = useUser()
 
   useEffect(() => {
     restoreChats()
