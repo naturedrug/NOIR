@@ -108,9 +108,11 @@ nextApp.prepare().then(() => {
 
         console.log("JOINED TO " + `user:${findedUser.id}`)
 
-        findedUser.channels.forEach(channel => {
-            socket.join(`chat:${channel.channelID}`)
-        });
+        if (findedUser.channels) {
+            findedUser.channels.forEach(channel => {
+                socket.join(`chat:${channel.channelID}`)
+            });
+        }
 
         console.log('client connected:', socket.id);
 
@@ -229,10 +231,12 @@ nextApp.prepare().then(() => {
             const minutes = String(now.getMinutes()).padStart(2, '0');
 
             const time = {
+                
+                minutes: minutes,
+                hours: hours,
                 day: now.getDate(),
                 month: now.getMonth(),
-                hours: hours,
-                minutes: minutes
+                year: now.getFullYear()
             }
 
 

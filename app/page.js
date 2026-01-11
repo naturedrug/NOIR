@@ -53,7 +53,7 @@ export default function Home() {
             allMessages={allMessages}
             setCachedUsers={setCachedUsers}
           />
-          <div onClick={() => setNewChannelPromptDisplay("flex")}>
+          <div onClick={() => setNewChannelPromptDisplay("flex")} className={css.newChat}>
             <Image src={newChatSvg} alt="new chat" />
           </div>
           <div className={css.mainContent} ref={mainContentRef}>

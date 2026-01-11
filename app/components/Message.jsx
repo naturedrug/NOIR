@@ -46,7 +46,7 @@ const Message = forwardRef(function Message(
 
   return (
     <div>
-      {(prev && prev.at.day != at.day) ?
+      {(prev && prev.at.day != at.day || prev && prev.at.month != at.month) ?
         <div className={css.timeline}>
           <span>{`${monthsRu[at.month]}, ${at.day}`}</span>
         </div> :
