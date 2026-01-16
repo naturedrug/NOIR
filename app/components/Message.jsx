@@ -51,8 +51,8 @@ const Message = forwardRef(function Message(
           <span>{`${monthsRu[at.month]}, ${at.day}`}</span>
         </div> :
         undefined}
-      <div ref={ref} data-id={id} className={css.message}>
-        <div className={css.messageContainer}>
+      <div ref={ref} data-id={id} data-testid="msg" className={css.message}>
+        <div className={css.messageContainer} data-id={id} data-testid="msg">
           <img src={avatar} className={css.avatar} />
           <Link className={css.username} href={`/users/${username}`}>
             {username}

@@ -35,7 +35,7 @@ export default function Home() {
 
   const dummyRef = useRef(null)
 
-  const [messagesDOM, setMessagesDOM] = useState()
+  // const [messagesDOM, setMessagesDOM] = useState()
   
   useEffect(() => {
     dummyRef.current.scrollIntoView({ behavior: "smooth", block: "end" })

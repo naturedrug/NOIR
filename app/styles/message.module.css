@@ -63,8 +63,8 @@
     width: 100%;
 }
 
-.messageContainer p {
-    margin-top: 25px;
+.message p {
+    cursor: text;
 }
 
 .message .at {
