@@ -1,6 +1,7 @@
 import express from 'express'
 import next from 'next'
 import apiRoutes from "./routes/api.js"
+import apiDeleteRoutes from "./routes/apidelete.js"
 import { Server } from 'socket.io';
 import http from "http"
 import path from 'path';
@@ -15,6 +16,8 @@ const __dirname = path.dirname(__filename);
 
 const dbPath = path.join("db", "db.json")
 
+export let io
+
 
 const dev = process.env.NODE_ENV !== 'production';
 const nextApp = next({ dev });
@@ -28,6 +31,7 @@ nextApp.prepare().then(() => {
     app.use("/static", express.static(path.join(__dirname, "uploads")));
     app.use("/media", express.static(path.join(__dirname, "public")))
     app.use("/api", apiRoutes);
+    app.use("/api", apiDeleteRoutes)
 
     app.post("/api/acc-info", async (req, res) => {
         const db = await fs.promises.readFile(dbPath, "utf-8");
@@ -75,7 +79,7 @@ nextApp.prepare().then(() => {
 
     const server = http.createServer(app)
 
-    const io = new Server(server)
+    io = new Server(server)
 
     io.on('connection', async (socket) => {
         const databaseConn = await fs.promises.readFile(dbPath, 'utf-8')

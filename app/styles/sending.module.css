@@ -15,7 +15,7 @@
   height: 100%;
   outline: none;
   font-size: 100%;
-  padding-left: 80px;
+  padding-left: 105px;
   background-color: rgb(15, 15, 15);
   color: white;
 }
@@ -41,6 +41,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
+  background-color: var(--def);
 }
 
 .imageInputLabel svg {

@@ -78,7 +78,7 @@ export default function Sidebar({ onMessagesChanged, setAllMessages, allMessages
       const pmName = otherMembers.map(id => cachedUsers[id]?.username || "PM").join(", ")
       const pmAvatar = otherMembers.map(id => cachedUsers[id]?.avatar || "/default.png")[0] || "/default.png"
 
-      chats.push({ id: pmInfo.id, channelName: pmName, avatar: pmAvatar })
+      chats.push({ id: pmInfo.id, name: pmName, avatar: pmAvatar })
     })
 
     await Promise.all([...channelPromises, ...pmPromises])
@@ -98,7 +98,7 @@ export default function Sidebar({ onMessagesChanged, setAllMessages, allMessages
         <Channel
           key={chat.id}
           id={chat.id}
-          name={chat.channelName}
+          name={chat.name}
           avatar={chat.avatar}
           messages={allMessages[chat.id]}
           onMessagesChanged={handleChannelClick}

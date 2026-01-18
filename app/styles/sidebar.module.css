@@ -2,7 +2,7 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 75px;
+  width: 100px;
   min-width: 75px;
   max-width: 400px;
   height: 100vh;
@@ -10,8 +10,9 @@
   border-right: 1px solid rgb(53,53,53);
   z-index: 999;
   padding-top: 100px;
-  overflow: hidden;
+  overflow-x: hidden;
   user-select: none;
+  resize: horizontal;
 }
 
 .channel {
@@ -50,16 +51,6 @@ user-select: none;
 .sideBar.open .channelTitle {
   opacity: 1;
   max-height: 40px;
-}
-
-.sideBar-handle {
-  width: 6px;
-  height: 100%;
-  position: absolute;
-  top: 0;
-  right: 0;
-  cursor: ew-resize;
-  background: transparent;
 }
 
 .channelName {

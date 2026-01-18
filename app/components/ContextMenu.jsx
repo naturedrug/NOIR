@@ -2,14 +2,26 @@
 
 import css from "../styles/contextmenu.module.css"
 
-import { useEffect, useState } from "react"
+import { useEffect, useState, useRef } from "react"
 import ContextMenuItem from "./ContextMenuItem"
 
-import copySvg from "../../public/copy.svg"
+const menuItems = {
+    "Copy": {
+
+    },
+    "Paste": {
+
+    },
+    "Delete message": {
+
+    }
+}
 
 export default function ContextMenu() {
 
     const [target, setTarget] = useState(null)
+
+    const menuRef = useRef(null)
 
     const [menu, setMenu] = useState({
         x: 0,
@@ -21,16 +33,21 @@ export default function ContextMenu() {
         function openMenu(e) {
             e.preventDefault()
 
-            setMenu({
-                x: e.pageX,
-                y: e.pageY,
-                visible: true
-            })
-
             setTarget(e.target)
+
+            if (target != menuRef) {
+                setMenu({
+                    x: e.pageX,
+                    y: e.pageY,
+                    visible: true
+                })
+    
+            }
+
         }
 
-        function closeMenu() {
+        function closeMenu(e) {
+
             setMenu({
                 x: menu.x,
                 y: menu.y,
@@ -40,7 +57,7 @@ export default function ContextMenu() {
 
         document.addEventListener("contextmenu", (e) => openMenu(e))
 
-        document.addEventListener("click", closeMenu)
+        document.addEventListener("click", (e) => closeMenu(e))
 
         return () => {
             document.removeEventListener("contextmenu", openMenu)
@@ -50,11 +67,14 @@ export default function ContextMenu() {
 
 
     return (
-        <div className={css.contextMenu} style={{ display: (menu.visible) ? "flex" : "none", left: menu.x, top: menu.y }}>
-            <ContextMenuItem role={"Copy"} target={target} icon={copySvg}></ContextMenuItem>
-            <ContextMenuItem role={"Copy"} target={target} icon={copySvg}></ContextMenuItem>
-            <ContextMenuItem role={"Copy"} target={target} icon={copySvg}></ContextMenuItem>
-            <ContextMenuItem role={"Copy"} target={target} icon={copySvg}></ContextMenuItem>
+        <div className={css.contextMenu} style={{ display: (menu.visible) ? "flex" : "none", left: menu.x, top: menu.y }} ref={menuRef}>
+            {Object.entries(menuItems).map(([key, item]) => (
+                <ContextMenuItem
+                    key={key}
+                    role={item.role || key}
+                    target={target}
+                />
+            ))}
         </div>
     )
 }

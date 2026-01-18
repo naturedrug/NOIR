@@ -63,6 +63,7 @@ export default function Home() {
                 return <Message
                   key={message.id}
                   id={message.id}
+                  my= {(message.userID === user.id) ? true : false}
                   ref={(el) => (messagesRefs.current[message.id] = el)}
                   text={message.text}
                   media={message.media}
@@ -73,7 +74,7 @@ export default function Home() {
                   prev={(messages[index - 1]) ? messages[index - 1] : undefined}
                 />
               })}
-              <div style={{ marginTop: "75px" }} ref={dummyRef}></div>
+              <div style={{ paddingTop: "55px" }} ref={dummyRef}></div>
             </div>
             <Sending />
           </div>

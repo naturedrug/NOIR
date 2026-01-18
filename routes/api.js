@@ -10,8 +10,6 @@ import multer from "multer";
 
 import iconv from "iconv-lite";
 
-import serverConfig from "../serverConfig.js";
-
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -38,7 +36,7 @@ const upload = multer({ storage: storage });
 
 const dbPath = path.join(__dirname, "..", "db", "db.json");
 
-const DEFAULT_AVATAR = "http://localhost:3000/media/people.png"
+const DEFAULT_AVATAR = "/media/people.png"
 
 const router = express.Router();
 
@@ -62,7 +60,7 @@ router.post("/auth", async (req, res) => {
     const isPasswordValid = await bcrypt.compare(data.password, user.password);
 
     if (isPasswordValid) {
-      const refreshedToken = nanoid(14);
+      const refreshedToken = nanoid(20);
       const refreshedHashedToken = await bcrypt.hash(refreshedToken, 12);
 
       user.token = refreshedHashedToken;
@@ -124,14 +122,14 @@ router.post("/reg", async (req, res) => {
     } else {
       const hashedPassword = await bcrypt.hash(data.password, 12);
 
-      const token = nanoid(21);
+      const token = nanoid(20);
       const hashedToken = await bcrypt.hash(token, 12);
 
       const newUser = {
         username: data.username,
         password: hashedPassword,
         token: hashedToken,
-        avatar: `http://${serverConfig.hostname}:${serverConfig.port}/media/people.png`,
+        avatar: "/media/people.png",
         id: nanoid(20),
       };
 

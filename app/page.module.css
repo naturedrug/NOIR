@@ -36,9 +36,10 @@ html, body {
 .newChat {
   cursor: pointer;
   position: fixed;
-  width: 48px;
-  height: 48px;
-  top: 10px;
+  width: 32px;
+  height: 32px;
+  top: 20px;
+  left: 20px;
   display: flex;
   flex-direction: row;
   align-items: center;
@@ -47,10 +48,11 @@ html, body {
   padding: 10px;
   transition: all 0.2s;
   border-radius: 50%;
+  background-color: rgb(210,45,45);
 }
 
 .newChat:hover {
-  background-color: rgb(30,30,30);
+  background-color: rgb(160,45,45);
 }
 
 .newChat img {

@@ -65,6 +65,7 @@
 
 .message p {
     cursor: text;
+    margin: 0;
 }
 
 .message .at {
@@ -82,4 +83,10 @@
     position: absolute;
     bottom: 10px;
     right: 15px; 
+}
+
+
+.msgCont[data-own=false] {
+    align-self: flex-end;
+    margin-right: 50px;
 }

@@ -10,7 +10,8 @@ html, body {
 }
 
 :root {
-    --el-bg: rgb(5,5,5)
+    --el-bg: rgb(5,5,5);
+    --def: rgb(210,45,45);
 }
 
 * {
@@ -34,6 +35,10 @@ button {
 input {
     border: none;
     outline: none;
+}
+
+input:focus {
+    border-bottom: 1px solid var(--def);
 }
 
 .alertBar {
