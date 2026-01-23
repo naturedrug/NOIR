@@ -10,9 +10,8 @@
   border-right: 1px solid rgb(53,53,53);
   z-index: 999;
   padding-top: 100px;
-  overflow-x: hidden;
+  overflow: hidden;
   user-select: none;
-  resize: horizontal;
 }
 
 .channel {
@@ -56,4 +55,14 @@ user-select: none;
 .channelName {
     left: 5px;
     position: fixed;
+}
+
+.sidebarResize {
+  cursor: col-resize;
+  position: absolute;
+  right: 0px;
+  top: 0px;
+  width: 10px;
+  height: 100%;
+  z-index: 9999;
 }

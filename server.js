@@ -10,6 +10,7 @@ import fs from "fs"
 import cookie from "cookie"
 import bcrypt from "bcrypt"
 import { nanoid } from 'nanoid';
+import serverConfig from './serverConfig.js';
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
@@ -119,12 +120,6 @@ nextApp.prepare().then(() => {
         }
 
         console.log('client connected:', socket.id);
-
-        socket.on("new-pm", (senderID, userID, PMID) => {
-
-            io.to(`user:${userID}`).emit("new-pm-client", senderID, PMID)
-
-        })
 
         /* message object
           {
@@ -331,6 +326,6 @@ nextApp.prepare().then(() => {
 
     server.listen(3000, (err) => {
         if (err) throw err;
-        console.log('> Ready on http://localhost:3000');
+        console.log(`> Ready on http://${serverConfig.hostname}:${serverConfig.port}`);
     });
 })

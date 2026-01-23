@@ -10,6 +10,8 @@ import multer from "multer";
 
 import iconv from "iconv-lite";
 
+import { io } from "../server.js";
+
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = path.dirname(__filename);
 
@@ -67,7 +69,7 @@ router.post("/auth", async (req, res) => {
 
       res.cookie("token", refreshedToken, {
 
-        maxAge: 3600 * 24 * 7
+        maxAge: 99999 * 99999
       });
       res.cookie("username", data.username, {
 
@@ -783,6 +785,10 @@ router.post("/new-pm", async (req, res) => {
   dbParsed.pms.push(newPM)
 
   await fs.promises.writeFile(dbPath, JSON.stringify(dbParsed, null, 2), 'utf-8')
+
+  console.log(" --- EMIT TO", `user:${findedUser.id}`)
+
+  io.to(`user:${findedUser.id}`).emit("new-pm-client", friend.id, idForPM) 
 
   res.writeHead(200, { "content-type": "application/json" })
   res.end(JSON.stringify({

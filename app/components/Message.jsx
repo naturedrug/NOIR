@@ -40,12 +40,12 @@ const monthsEn = [
 
 
 const Message = forwardRef(function Message(
-  { text, my, media, username, avatar, at, id, read, prev },
+  { text, my, media, username, avatar, at, id, read, prev, padding},
   ref
 ) {
 
   return (
-    <div data-own={my} className={css.msgCont}>
+    <div data-own={my} className={css.msgCont} style={{marginLeft: padding}}>
       {(prev && prev.at.day != at.day || prev && prev.at.month != at.month) ?
         <div className={css.timeline}>
           <span>{`${monthsRu[at.month]}, ${at.day}`}</span>

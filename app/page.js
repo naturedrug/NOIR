@@ -33,8 +33,9 @@ export default function Home() {
   const { messages, allMessages, setAllMessages, messagesRefs, setMessages } = useMessages(user, setCachedUsers);
   const visibleMessages = useMessageObserver(messages, messagesRefs, contentRef);
 
-  const dummyRef = useRef(null)
+  const [contentPadd, setContentPadd] = useState(20)
 
+  const dummyRef = useRef(null)
   // const [messagesDOM, setMessagesDOM] = useState()
   
   useEffect(() => {
@@ -52,6 +53,7 @@ export default function Home() {
             setAllMessages={setAllMessages}
             allMessages={allMessages}
             setCachedUsers={setCachedUsers}
+            setContentPadd={setContentPadd}
           />
           <div onClick={() => setNewChannelPromptDisplay("flex")} className={css.newChat}>
             <Image src={newChatSvg} alt="new chat" />
@@ -72,6 +74,7 @@ export default function Home() {
                   at={message.at}
                   read={visibleMessages.has(message.id)}
                   prev={(messages[index - 1]) ? messages[index - 1] : undefined}
+                  padding={(message.userID === user.id) ? contentPadd : 0}
                 />
               })}
               <div style={{ paddingTop: "55px" }} ref={dummyRef}></div>
