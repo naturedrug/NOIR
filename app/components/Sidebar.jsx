@@ -3,13 +3,14 @@ import { useEffect, useState, useCallback, useRef } from "react"
 import Channel from "./Channel"
 import useRestoreChats from "../hooks/useRestoreChats"
 
-import socket from "../socket"
+import socket from "../socket.js"
 
 const MIN_WIDTH = 90
 const MAX_WIDTH = 400
 
 export default function Sidebar({
   onMessagesChanged,
+  onChannelChanged,
   setAllMessages,
   allMessages,
   setCachedUsers,
@@ -65,15 +66,36 @@ export default function Sidebar({
   const handleChannelClick = useCallback(
     (messages) => {
       onMessagesChanged(messages?.length > 0 ? messages : [])
-    },
+    }
+    ,
     [onMessagesChanged]
   )
 
-  useEffect(() => {
-    socket.on("new-pm-client", () => {
-      console.log("123123")
+useEffect(() => {
+  const handler = async (senderID, pmID) => {
+    console.log("new pm: ", { sender: senderID, PM: pmID })
+
+    let response = await fetch("/api/acc-info-by-id", {
+      method: "POST",
+      headers: { "content-type": "application/json" },
+      body: JSON.stringify({ id: senderID })
     })
-  }, [])
+
+    response = await response.json()
+
+    setLoadedChats(prev => [
+      ...prev,
+      { id: pmID, name: response.username, avatar: response.avatar }
+    ])
+  }
+
+  socket.on("new-pm-client", handler)
+
+  return () => {
+    socket.off("new-pm-client", handler)
+  }
+}, [])
+
 
   return (
     <div className={css.sidebar} style={{ width: `${sidebarW}px` }}>
@@ -91,6 +113,9 @@ export default function Sidebar({
           avatar={chat.avatar}
           messages={allMessages[chat.id]}
           onMessagesChanged={handleChannelClick}
+          onChannelChanged={onChannelChanged}
+          members={chat.membersVal}
+          type={chat.type}
         />
       ))}
     </div>

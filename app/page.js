@@ -35,6 +35,8 @@ export default function Home() {
 
   const [contentPadd, setContentPadd] = useState(20)
 
+  const [currentRoom, setCurrentRoom] = useState({})
+
   const dummyRef = useRef(null)
   // const [messagesDOM, setMessagesDOM] = useState()
   
@@ -47,8 +49,9 @@ export default function Home() {
     <UserContext.Provider value={user}>
       <div className="page">
         <div className="container">
-          <Header />
+          <Header channelName={currentRoom.name} channelAvatar={currentRoom.avatar} channelMembers={currentRoom.members} type={currentRoom.type}/>
           <Sidebar
+          onChannelChanged={setCurrentRoom}
             onMessagesChanged={setMessages}
             setAllMessages={setAllMessages}
             allMessages={allMessages}

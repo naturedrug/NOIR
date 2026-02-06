@@ -5,7 +5,7 @@ import css from "../styles/channel.module.css"
 import socket from "../socket"
 import getCookie from "./cookies"
 
-export default function Channel({ id, name, avatar, messages, onMessagesChanged }) {
+export default function Channel({ id, name, avatar, messages, onMessagesChanged, onChannelChanged, members, type }) {
     
 const handleClick = () => {
 
@@ -13,6 +13,8 @@ const handleClick = () => {
   socket.emit("change-room", getCookie("token"), id);
 
   onMessagesChanged(messages || []);
+
+  onChannelChanged({name: name, avatar: avatar, members: members, type: type})
 };
 
     

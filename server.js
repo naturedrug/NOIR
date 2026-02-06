@@ -304,6 +304,11 @@ nextApp.prepare().then(() => {
 
         });
 
+        socket.on("audio_blob", (blob, room) => {
+
+            socket.to(`chat:${room}`).emit("get_audio_packet", blob)
+        })
+
         socket.on("inputing", ({ room }) => {
 
 

@@ -68,6 +68,7 @@ class Utils {
 
         for (const user of this.dbParsed.users) {
             user.channels = []
+            user.pms = []
         }
 
         this.write(this.dbParsed)

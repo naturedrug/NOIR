@@ -370,6 +370,8 @@ router.post("/new-channel", upload.single("avatar"), async (req, res) => {
     author: userID,
     avatar: `/static/${channelID}.jpg`,
     channelID: channelID,
+    messages: [],
+    membersVal: 0
   };
 
   dbParsed.channels.push(newChannel);
@@ -474,10 +476,13 @@ if (
     user.channels.push({
       channelID: channelById.channelID,
     });
+
+    channelById.membersVal = Number(channelById.membersVal) + 1
   } else if (channelByName) {
     user.channels.push({
       channelID: channelByName.channelID,
     });
+    channelByName.membersVal = Number(channelByName.membersVal) + 1
   }
 
 
@@ -786,9 +791,9 @@ router.post("/new-pm", async (req, res) => {
 
   await fs.promises.writeFile(dbPath, JSON.stringify(dbParsed, null, 2), 'utf-8')
 
-  console.log(" --- EMIT TO", `user:${findedUser.id}`)
+  console.log(" --- EMIT TO", `user:${friend.id}`)
 
-  io.to(`user:${findedUser.id}`).emit("new-pm-client", friend.id, idForPM) 
+  io.to(`user:${friend.id}`).emit("new-pm-client", findedUser.id, idForPM) 
 
   res.writeHead(200, { "content-type": "application/json" })
   res.end(JSON.stringify({

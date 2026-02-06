@@ -22,11 +22,18 @@ export default function useRestoreChats(setCachedUsers, setLoadedChats, setAllMe
                 headers: { "content-type": "application/json" },
                 body: JSON.stringify({ channelID: channel.channelID, token })
             })
+
             if (!res.ok) return
+            
             const channelInfo = await res.json()
+            
             if (channelInfo.channelName?.length > 15) channelInfo.channelName = channelInfo.channelName.slice(0, 15) + " ..."
+
             channelInfo.id = channel.channelID
+            channelInfo.type = "channel"
+            
             chats.push(channelInfo)
+
             if (channelInfo.messages) {
                 messagesMap[channel.channelID] = channelInfo.messages
                 for (const message of channelInfo.messages) {
@@ -69,7 +76,7 @@ export default function useRestoreChats(setCachedUsers, setLoadedChats, setAllMe
             const pmName = otherMembers.map(id => cachedUsers[id]?.username || "PM").join(", ")
             const pmAvatar = otherMembers.map(id => cachedUsers[id]?.avatar || "/default.png")[0] || "/default.png"
 
-            chats.push({ id: pmInfo.id, name: pmName, avatar: pmAvatar })
+            chats.push({ id: pmInfo.id, name: pmName, avatar: pmAvatar, type: "pm"})
         })
 
         await Promise.all([...channelPromises, ...pmPromises])

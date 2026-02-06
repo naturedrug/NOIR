@@ -10,7 +10,12 @@
   flex-direction: row;
   align-items: center;
   padding-left: 120px;
-  z-index: 999;
+  z-index: 99999;
+}
+
+.headerContainer {
+  display: flex;
+  align-items: center;
 }
 
 .search {
@@ -27,4 +32,23 @@
 
 .header svg {
     margin-left: 20px;
+}
+
+.headerChannelName {
+  font-size: 1.3rem;
+}
+
+.headerChannelName span {
+  font-size: 1rem;
+}
+
+.headerChannelAvatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  margin-right: 20px;
+}
+
+.headerContainer span {
+  color: rgb(194, 194, 194);
 }

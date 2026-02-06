@@ -21,6 +21,7 @@
     background-color: black;
     transition: all 0.2s;
     overflow: hidden;
+    max-width: 700px;
 }
 
 .message:hover {
