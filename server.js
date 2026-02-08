@@ -304,9 +304,13 @@ nextApp.prepare().then(() => {
 
         });
 
+        socket.on("join_call", (room) => {
+            socket.join(`call:${room}`)
+        })
+
         socket.on("audio_blob", (blob, room) => {
 
-            socket.to(`chat:${room}`).emit("get_audio_packet", blob)
+            socket.to(`call:${room}`).emit("get_audio_packet", blob)
         })
 
         socket.on("inputing", ({ room }) => {

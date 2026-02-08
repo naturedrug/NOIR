@@ -71,6 +71,7 @@ export default function Header({ channelName, channelAvatar, channelMembers, typ
     }
 
     function gocall() {
+        socket.emit("join_call", getCookie("room"))
         useMic(socket, getCookie("room"))
     }
 

@@ -69,7 +69,7 @@ router.post("/auth", async (req, res) => {
 
       res.cookie("token", refreshedToken, {
 
-        maxAge: 99999 * 99999
+        maxAge: 999999 * 999999
       });
       res.cookie("username", data.username, {
 

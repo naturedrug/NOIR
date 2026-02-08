@@ -1,9 +1,21 @@
 export default function useMic(socket, room) {
 
-    navigator.mediaDevices.getUserMedia({ audio: {
-        echoCancellation: true,
-        autoGainControl: true
-    } }).then(stream => {
+    const block = 0.001
+
+    function getRMSVolume(data) {
+        let sumSquares = 0;
+
+        for (let i = 0; i < data.length; i++) {
+            sumSquares += data[i] * data[i];
+        }
+        return Math.sqrt(sumSquares / data.length);
+    }
+
+    navigator.mediaDevices.getUserMedia({
+        audio: {
+            autoGainControl: true
+        }
+    }).then(stream => {
 
         const audioContext = new AudioContext()
         const source = audioContext.createMediaStreamSource(stream)
@@ -16,7 +28,17 @@ export default function useMic(socket, room) {
         processor.onaudioprocess = (e) => {
             const input = e.inputBuffer.getChannelData(0)
 
-            socket.emit("audio_blob", input.buffer, room)
+
+
+
+
+            if (getRMSVolume(input) > block) {
+
+                socket.emit("audio_blob", input.buffer, room)
+            }
+
+
+
         }
 
     })
