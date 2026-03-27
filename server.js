@@ -78,9 +78,19 @@ nextApp.prepare().then(() => {
     });
 
 
+    const calls = {}
+
     const server = http.createServer(app)
 
-    io = new Server(server)
+    io = new Server(server, {
+        cors: {
+            origin: [
+                `http://${serverConfig.hostname}:${serverConfig.port}`,
+            ],
+            methods: ["GET", "POST"],
+            credentials: true,
+        }
+    })
 
     io.on('connection', async (socket) => {
         const databaseConn = await fs.promises.readFile(dbPath, 'utf-8')
@@ -230,7 +240,7 @@ nextApp.prepare().then(() => {
             const minutes = String(now.getMinutes()).padStart(2, '0');
 
             const time = {
-                
+
                 minutes: minutes,
                 hours: hours,
                 day: now.getDate(),
@@ -304,8 +314,20 @@ nextApp.prepare().then(() => {
 
         });
 
-        socket.on("join_call", (room) => {
+        socket.on("join_call", (room, id) => {
             socket.join(`call:${room}`)
+
+
+            if (!calls[room]) {
+                calls[room] = new Set()
+
+            }
+
+            calls[room].add(id)
+
+            io.to(`chat:${room}`).emit("new_member_call", id, Array.from(calls[room]))
+
+
         })
 
         socket.on("audio_blob", (blob, room) => {
@@ -313,12 +335,58 @@ nextApp.prepare().then(() => {
             socket.to(`call:${room}`).emit("get_audio_packet", blob)
         })
 
-        socket.on("inputing", ({ room }) => {
+
+        socket.on("typing", async (token, room) => {
+            const db = await fs.promises.readFile(dbPath, 'utf-8')
+            const dbParsed = JSON.parse(db)
+
+            let matchedUser = false;
+
+            for (const user of dbParsed.users) {
+
+                const match = await bcrypt.compare(token, user.token)
+
+                if (match) {
+                    matchedUser = user
+                }
+            }
+
+            if (matchedUser) {
+
+                // console.log(room)
+
+                socket.to(`chat:${room}`).emit("typing-server", matchedUser.username)
+            } else {
+                return console.error("don't have user with this token (typing handler)")
+            }
 
 
-            if (!findedUser) return;
 
-            socket.to(room).emit("inputing-server", findedUser.username)
+        })
+
+        socket.on("disconnecting", () => {
+
+            const roomsArr = Array.from(socket.rooms)
+            
+            const userRoom = roomsArr[1]
+            const chatRoom = roomsArr[2]
+
+            if (!userRoom.startsWith("user:")) return
+
+            
+            const call = roomsArr[3]
+            
+            if (!call) return
+            if (!call.startsWith("call:")) return
+            
+            const userID = userRoom.slice(5)
+            const chatID = chatRoom.slice(5)
+
+            socket.leave(call)
+
+            calls[chatID].delete(userID)
+
+            socket.to(chatRoom).emit("leave_call", userID)
         })
 
         socket.on('disconnect', () => {
@@ -333,7 +401,7 @@ nextApp.prepare().then(() => {
     });
 
 
-    server.listen(3000, (err) => {
+    server.listen(serverConfig.port, serverConfig.hostname, (err) => {
         if (err) throw err;
         console.log(`> Ready on http://${serverConfig.hostname}:${serverConfig.port}`);
     });

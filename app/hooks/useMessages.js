@@ -1,4 +1,3 @@
-// hooks/useMessages.js
 import { useState, useEffect, useRef } from "react";
 import socket from "../socket";
 import getCookie from "../components/cookies";
@@ -18,6 +17,7 @@ export default function useMessages(user, setCachedUsers) {
     audioRef.current = new Audio(audioSrc)
 
     const handler = (message) => {
+
       if (message.room === `chat:${getCookie("room")}`) {
         setMessages((prev) => [...prev, message]);
       } else {

@@ -5,9 +5,14 @@ import getCookie from "./cookies"
 
 import useMic from "../hooks/useMic"
 
+import CallMembers from "./CallMembers"
+
 import { useEffect } from "react"
+import { useUser } from "../contexts/UserContext"
 
 export default function Header({ channelName, channelAvatar, channelMembers, type }) {
+
+    const user = useUser()
 
     useEffect(() => {
         const audioContext = new AudioContext()
@@ -71,7 +76,7 @@ export default function Header({ channelName, channelAvatar, channelMembers, typ
     }
 
     function gocall() {
-        socket.emit("join_call", getCookie("room"))
+        socket.emit("join_call", getCookie("room"), user.id)
         useMic(socket, getCookie("room"))
     }
 
@@ -93,6 +98,8 @@ export default function Header({ channelName, channelAvatar, channelMembers, typ
             </div>
 
             <button onClick={gocall}>Call</button>
+
+            <CallMembers></CallMembers>
         </div>
     )
 }

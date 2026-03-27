@@ -1,51 +1,76 @@
 .message {
     cursor: pointer;
-    border: 1px solid rgb(99, 99, 99);
+    border: 1px solid #1f2937;
+
     padding: 15px;
     padding-left: 25px;
     padding-right: 25px;
-    border-radius: 40px;
-    color: white;
+
+    border-radius: 30px;
+
+    color: #e5e7eb;
+
     margin-top: 10px;
     margin-bottom: 10px;
+
     word-wrap: normal;
-    word-break: break-all;
+    word-break: break-word;
+
     display: flex;
     flex: 0 0 auto;
     flex-direction: column;
     align-items: center;
     gap: 10px;
+
     width: auto;
     min-width: 150px;
-    position: relative;
-    background-color: black;
-    transition: all 0.2s;
-    overflow: hidden;
     max-width: 700px;
+
+    position: relative;
+
+    background-color: #0b0b0c;
+
+    transition: background 0.15s ease, border 0.15s ease;
+
+    overflow: hidden;
 }
 
 .message:hover {
-    background-color: rgb(15, 15, 15);
+    background-color: #0f172a;
 }
 
-.my {
-    background-color: rgb(15, 15, 15);
+@media screen and (max-width: 500px) {
+  .message {
+    padding: 2px;
+  }
 }
+
+
+.my {
+    background-color: #261e3b;
+}
+
 
 .message .avatar {
     width: 48px;
     height: 48px;
     border-radius: 40px;
     margin: 5px;
+    object-fit: cover;
 }
 
+
 .message .username {
-    color: black;
-    transition: all 0.1s;
+    color: #60a5fa;
+    transition: 0.15s;
     text-decoration: none;
     font-weight: 500;
-    background-color: white;
 }
+
+.message .username:hover {
+    color: #3b82f6;
+}
+
 
 .message .messageMedia {
     border-radius: 10px;
@@ -53,11 +78,9 @@
     max-height: 500px;
     transform: scale(0.9);
     order: 999;
+    object-fit: cover;
 }
 
-.message .username:hover {
-    color: rgb(82, 137, 255);
-}
 
 .messageContainer {
     display: flex;
@@ -66,33 +89,41 @@
     width: 100%;
 }
 
+
 .message p {
     cursor: text;
     margin: 0;
 }
 
+
 .message .at {
-    color: rgb(145, 145, 145);
+    color: #64748b;
     position: absolute;
     right: 30px;
     top: 30px;
+    font-size: 1rem;
 }
 
 .message:hover .at {
-    color: rgb(200,200,200);
+    color: #94a3b8;
 }
+
 
 .message .readed {
     position: absolute;
     bottom: 10px;
-    right: 15px; 
+    right: 15px;
+    font-size: 0.75rem;
+    color: #64748b;
 }
+
 
 .msgCont[data-own=false] {
     align-self: flex-end;
     margin-right: 50px;
 }
 
-.msgCont[data-own=true] .message  {
-    background-color: rgb(17, 11, 11);
+
+.msgCont[data-own=true] .message {
+    background-color: #1f1e29;
 }

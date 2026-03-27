@@ -2,48 +2,79 @@
   position: fixed;
   top: 0;
   left: 0;
-  width: 100px;
+
+  width: 90px;
   min-width: 75px;
   max-width: 400px;
+
   height: 100vh;
-  background-color: rgba(0,0,0,1);
-  border-right: 1px solid rgb(53,53,53);
+
+  background: #0f1117;
+  border-right: 1px solid #222735;
+
   z-index: 999;
-  padding-top: 100px;
+
+  padding-top: 70px;
+
   overflow: hidden;
   user-select: none;
+
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+@media screen and (max-width: 500px) {
+  .sidebar {
+    display: none;
+  }
 }
 
 .channel {
-  user-select: none;
   cursor: pointer;
+
   width: 100%;
-  min-height: 100px;
-  border-bottom: 1px solid rgb(70,70,70);
+  min-height: 90px;
+
+  border-bottom: 1px solid #1c2230;
+
   text-align: center;
-  transition: all 0.2s;
-  padding-bottom: 10px;
+
+  padding: 10px;
+
   display: flex;
   justify-content: center;
   align-items: center;
   flex-direction: column;
+
+  transition: background 0.15s;
 }
 
 .channel:hover {
-    background-color: rgb(24, 24, 24);
+  background: #171b24;
 }
 
 .channelAvatar {
-  width: 64px;
-  height: 64px;
+  width: 52px;
+  height: 52px;
+
   border-radius: 50%;
+  object-fit: cover;
+
+  margin-bottom: 6px;
 }
 
 .channelTitle {
-  font-weight: 100;
+  font-size: 13px;
+  font-weight: 400;
+
+  color: #9aa4b2;
+
   max-height: 0;
   opacity: 0;
-  padding-bottom: 10px;
+
+  overflow: hidden;
+
   transition: opacity 0.2s, max-height 0.2s;
 }
 
@@ -53,16 +84,26 @@
 }
 
 .channelName {
-    left: 5px;
-    position: fixed;
+  position: fixed;
+  left: 10px;
+  display: none;
 }
 
 .sidebarResize {
   cursor: col-resize;
+
   position: absolute;
-  right: 0px;
-  top: 0px;
-  width: 10px;
+  right: 0;
+  top: 0;
+
+  width: 8px;
   height: 100%;
+
   z-index: 9999;
+
+  background: transparent;
+}
+
+.sidebarResize:hover {
+  background: rgba(47,127,255,0.2);
 }

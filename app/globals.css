@@ -11,7 +11,7 @@ html, body {
 
 :root {
     --el-bg: rgb(5,5,5);
-    --def: rgb(210,45,45);
+    --def: rgb(33, 31, 117);
 }
 
 * {

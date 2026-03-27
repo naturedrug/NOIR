@@ -18,6 +18,7 @@ import useMessages from "./hooks/useMessages";
 import useMessageObserver from "./hooks/useObserver";
 
 import css from "./page.module.css"
+import TypingBar from "./components/TypingBar";
 
 export default function Home() {
   const router = useRouter();
@@ -83,6 +84,7 @@ export default function Home() {
               <div style={{ paddingTop: "55px" }} ref={dummyRef}></div>
             </div>
             <Sending />
+            <TypingBar></TypingBar>
           </div>
           <NewChannelPrompt display={newChannelPromptDisplay} closeF={() => setNewChannelPromptDisplay("none")} />
         </div>

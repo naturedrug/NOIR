@@ -1,45 +1,88 @@
+/* newchannelprompt.css */
+
 .createNewChannel {
   position: fixed;
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: black;
+
+  background-color: #020617;
+
   display: none;
   flex-direction: column;
   align-items: center;
+
   gap: 30px;
-  border: 1px solid rgb(50, 50, 50);
+
+  border: 1px solid #1f2937;
+  border-radius: 12px;
+
   padding: 20px;
+
   z-index: 9999;
+
+  box-shadow: 0 20px 60px rgba(0,0,0,0.6);
 }
 
 .createNewChannel input {
   outline: none;
+
   padding: 10px;
-  background-color: rgb(10, 10, 10);
+
+  background-color: #0f172a;
+  border: 1px solid #1f2937;
+  border-radius: 6px;
+
   width: 90%;
+
   font-size: 100%;
+
+  color: #e5e7eb;
+
+  transition: border 0.15s, background 0.15s;
+}
+
+.createNewChannel input:focus {
+  border-color: #3b82f6;
+  background-color: #020617;
 }
 
 .createNewChannel button {
   cursor: pointer;
+
   padding: 20px;
-  border: 1px solid rgb(50, 50, 50);
+
+  border: 1px solid #1f2937;
+  border-radius: 8px;
+
   transition: all 0.2s;
-  background-color: black;
+
+  background-color: #1e293b;
+  color: #e5e7eb;
+
   width: 90%;
 }
 
 .createNewChannel button:hover {
-  color: black;
-  background-color: white;
+  background-color: #3b82f6;
+  border-color: #3b82f6;
+  color: white;
 }
 
 .closeCreateNewChannel {
   cursor: pointer;
+
   position: absolute;
   top: 5px;
   right: 5px;
+
   width: 32px;
   height: 32px;
+
+  opacity: 0.6;
+  transition: opacity 0.15s, transform 0.15s;
+}
+
+.closeCreateNewChannel:hover {
+  opacity: 1;
 }

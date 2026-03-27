@@ -1,7 +1,10 @@
 
-
 .unknownPage {
     text-transform: uppercase;
+    color: #94a3b8;
+    font-weight: 700;
+    letter-spacing: 1.5px;
+    margin-bottom: 20px;
 }
 
 .error {
@@ -10,11 +13,16 @@
     top: 50%;
     transform: translate(-50%, -50%);
     text-align: center;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
 }
 
 .error img {
     width: 128px;
     height: 128px;
+    object-fit: contain;
 }
 
 .errorIcon {
@@ -24,5 +32,8 @@
 }
 
 .errorInfo {
-    color: rgb(180, 180, 180);
+    color: #94a3b8;
+    font-size: 1rem;
+    max-width: 320px;
+    line-height: 1.5;
 }

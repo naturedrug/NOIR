@@ -6,7 +6,7 @@ import socket from "../socket"
 import getCookie from "./cookies"
 import { useEffect } from "react";
 
-export default function Channel({ id, name, avatar, messages, onMessagesChanged, onChannelChanged, members, type }) {
+export default function Channel({ id, name, avatar, messages, onMessagesChanged, onChannelChanged, members, type, sidebarW }) {
 
 
     const handleClick = () => {
@@ -21,7 +21,12 @@ export default function Channel({ id, name, avatar, messages, onMessagesChanged,
 
     useEffect(() => {
         if (getCookie("room") == id) {
+
+            socket.emit("change-room", getCookie("token"), id);
+
+
             onMessagesChanged(messages || []);
+
     
             onChannelChanged({ name: name, avatar: avatar, members: members, type: type })
         }
@@ -30,7 +35,7 @@ export default function Channel({ id, name, avatar, messages, onMessagesChanged,
 
     return (
         <div className={css.channel} onClick={handleClick}>
-            <h3 className={css.channelName}>{name}</h3>
+            <h3 className={css.channelName} style={{display: (sidebarW < 120) ? "none" : "flex"}}>{name}</h3>
             <img src={avatar} alt="channel avatar" className={css.channelAvatar} />
         </div>
     )

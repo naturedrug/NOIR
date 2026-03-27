@@ -20,6 +20,12 @@ html, body {
   max-height: 100vh;
 }
 
+@media screen and (max-width: 500px) {
+  .mainContent {
+    margin-left: 0px;
+  }
+}
+
 .content {
   flex: 1;
   padding: 20px;
@@ -48,12 +54,12 @@ html, body {
   padding: 10px;
   transition: all 0.2s;
   border-radius: 50%;
-  background-color: rgb(210,45,45);
+  background-color: rgb(29, 36, 94);
   z-index: 99999999999;
 }
 
 .newChat:hover {
-  background-color: rgb(160,45,45);
+  background-color: rgb(29, 34, 92);
 }
 
 .newChat img {

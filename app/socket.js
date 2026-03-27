@@ -3,7 +3,8 @@ import serverConfig from "@/serverConfig";
 
 
 const socket = io(`http://${serverConfig.hostname}:${serverConfig.port}`, {
-    withCredentials: true
+    withCredentials: true,
+    transports: ["websocket"]
 })
 
 export default socket

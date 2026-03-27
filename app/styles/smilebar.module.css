@@ -1,0 +1,85 @@
+
+.smilebar {
+    position: fixed;
+    bottom: 80px; 
+    right: 20px;
+    z-index: 1000;
+
+    background: #1e1e1e;
+    border-radius: 16px;
+    padding: 10px;
+
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    animation: fadeIn 0.2s ease-in-out;
+}
+
+
+.smileList {
+    display: grid;
+    grid-template-columns: repeat(5, 1fr);
+    gap: 8px;
+}
+
+.smile {
+    width: 40px;
+    height: 40px;
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    font-size: 22px;
+    cursor: pointer;
+
+    border-radius: 10px;
+    transition: all 0.15s ease;
+}
+
+.smile:hover {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(1.15);
+}
+
+
+.openButton {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+
+    width: 55px;
+    height: 55px;
+
+    border-radius: 50%;
+    border: none;
+
+    background: #4f46e5;
+    color: white;
+    font-size: 24px;
+
+    cursor: pointer;
+    box-shadow: 0 6px 20px rgba(79, 70, 229, 0.4);
+
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    transition: all 0.2s ease;
+}
+
+
+.openButton:hover {
+    background: #4338ca;
+    transform: scale(1.1);
+}
+
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}

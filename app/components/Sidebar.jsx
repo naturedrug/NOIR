@@ -4,6 +4,7 @@ import Channel from "./Channel"
 import useRestoreChats from "../hooks/useRestoreChats"
 
 import socket from "../socket.js"
+import getCookie from "./cookies"
 
 const MIN_WIDTH = 90
 const MAX_WIDTH = 400
@@ -30,6 +31,13 @@ export default function Sidebar({
 
   useEffect(() => {
     restoreChats()
+
+    if (getCookie("sidebarw")) {
+      const cookieWidth = Number(getCookie("sidebarw"))
+
+      setSidebarW(cookieWidth)
+      setContentPadd(cookieWidth - 90)
+    }
   }, [])
 
 
@@ -45,6 +53,7 @@ export default function Sidebar({
       setContentPadd(nextWidth - 90)
 
       setSidebarW(nextWidth)
+      document.cookie = `sidebarw=${nextWidth}`
     },
     [isMouseDown]
   )
@@ -116,6 +125,7 @@ useEffect(() => {
           onChannelChanged={onChannelChanged}
           members={chat.membersVal}
           type={chat.type}
+          sidebarW={sidebarW}
         />
       ))}
     </div>
